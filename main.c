@@ -100,13 +100,13 @@ void sort100000(int* array, int* sizes, int amSizes) {
 int main(void) {
   setlocale(LC_ALL, "");
   printf("Welcome!\n");
-  void (*sorts[])(int* , int) = {Select, Insert, Bubble, Merge};
+  void (*sorts[])(int* , int) = { Select, Insert, Bubble};
   int sizes[5] = {100,1000,10000,50000,100000};
   for (int i = 0; i < 5; i++) { 
      int *array = malloc(sizeof(int) * sizes[i]);
      iterArr(array, sizes[i]);
 
-     for (int j = 0; j < 4; j++) {
+     for (int j = 0; j < 3; j++) {
         int *to_sort = malloc(sizeof(int) * sizes[i]);
         memcpy(to_sort, array, sizes[i] * sizeof(int));
   

@@ -120,8 +120,6 @@ void breakdown(int* array, int left, int pivot, int right) {
         k++;
     }
 
-    // Copy the remaining elements of R[],
-    // if there are any
     while (j < lenR) {
         array[k] = rightPart[j];
         j++;
