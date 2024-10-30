@@ -11,6 +11,14 @@ void iterArr(int* array, int size) {
   }
 }
 
+int* arrayTeste(int size) {
+  int* array = (int*)malloc(size*sizeof(int));
+  for (int i = 0; i < size; i++) {
+    array[i] = rand();
+  }
+  return array;
+}
+
 void emptyArr(int* array, int size) {
   for (int i = 0; i < size; i++) {
     array[i] = 0;
@@ -100,7 +108,7 @@ void sort100000(int* array, int* sizes, int amSizes) {
 int main(void) {
   setlocale(LC_ALL, "");
   printf("Welcome!\n");
-  void (*sorts[])(int* , int) = { Select, Insert, Bubble};
+  /*void (*sorts[])(int* , int) = { Select, Insert, Bubble};
   int sizes[5] = {100,1000,10000,50000,100000};
   for (int i = 0; i < 5; i++) { 
      int *array = malloc(sizeof(int) * sizes[i]);
@@ -115,7 +123,9 @@ int main(void) {
      }
 
       free(array);
-  }
+  }*/
+
+  Quick(arrayTeste(100), 100);
   
   return 0;
 }

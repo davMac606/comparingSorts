@@ -80,19 +80,13 @@ boolean Bubble(int *array, int n) {
   return true;
 }
 
-void mergeSort(int* array, int left, int right) {
-  if (left < right) {
-    int pivot = (left + right) / 2;
-    mergeSort(array, left, pivot);
-    mergeSort(array, pivot+1, right);
-    breakdown(array, left, pivot, right);
-  }
-}
 
-void breakdown(int* array, int left, int pivot, int right) {
+
+static void breakdown(int* array, int left, int pivot, int right) {
   int lenL = pivot - left;
   int lenR = right - pivot;
-  int leftPart[lenL], rightPart[lenR], i, j, k;
+  int leftPart[lenL], rightPart[lenR], i, j;
+  int k = left;
 
   for (i = 0; i < lenL; i++) {
     leftPart[i] = array[left+1];
@@ -101,7 +95,6 @@ void breakdown(int* array, int left, int pivot, int right) {
     rightPart[j] = array[pivot+j+1];
   }
   i,j = 0;
-  k = left;
 
   while (i < lenL && j < lenR) {
     if (leftPart[i] <= rightPart[j]) {
@@ -126,7 +119,14 @@ void breakdown(int* array, int left, int pivot, int right) {
         k++;
     }
 }
-
+static void mergeSort(int* array, int left, int right) {
+  if (left < right) {
+    int pivot = (left + right) / 2;
+    mergeSort(array, left, pivot);
+    mergeSort(array, pivot+1, right);
+    breakdown(array, left, pivot, right);
+  }
+}
 
 boolean Merge(int* array, int n) {
   inicio = clock();
@@ -138,6 +138,29 @@ boolean Merge(int* array, int n) {
   tempo_cpu = ((double) (fim - inicio)) / CLOCKS_PER_SEC;
   printf("\n\nMetodo: Merge.\nArray de tamanho %d ordenado com sucesso.\n", n);
   printf("Tempo de execucao: %f segundos.\n", tempo_cpu);
-
   return true;
+}
+
+static void troca(int* numA, int* numB) {
+  int temp;
+  temp = *numA;
+  *numA = *numB;
+  *numB = temp;
+
+}
+
+int part(int* array, int left, int right) {
+    int pivot = array[left];
+    int pos = right;
+    for (int i = 0; i < right; i++) {
+      if (array[i] >= pivot) {
+        pos--; 
+        troca(array[i], array[0]);
+      }
+    }
+}
+
+boolean Quick(int* array, int n) {
+  int pivot, temp;
+  pivot = array[0];
 }
