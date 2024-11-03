@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <time.h>
-#include "methods.c"
+#include "methods.h"
 #include <locale.h>
 #include <string.h>
 #include <stdlib.h>
@@ -18,22 +18,39 @@ int* arrayTeste(int size) {
   }
   return array;
 }
+
 int main(void) {
   setlocale(LC_ALL, "");
   printf("Welcome!\n");
-  void (*sorts[])(int* , int) = {Select, Insert, Bubble, Merge, Quick, Heap};
-  int sizes[5] = {100,1000,10000,50000,100000};
+
+  clock_t inicio, fim;
+  double tempo_cpu;
+
+  boolean (*sorts[])(int* , int) = {SELECT, INSERT, BUBBLE, MERGE, QUICK, HEAP};
+
+  char *names[] = { "Select", "Insert", "Bubble", "Merge", "Quick", "Heap" };
+
+  int sizes[] = {100,1000,10000,50000,100000};
+
   for (int i = 0; i < 5; i++) { 
      int *array = malloc(sizeof(int) * sizes[i]);
      iterArr(array, sizes[i]);
      for (int j = 0; j < 6; j++) {
         int* to_sort = malloc(sizeof(int) * sizes[i]);
         memcpy(to_sort, array, sizes[i] * sizeof(int));
-  
-        sorts[j](to_sort, sizes[i]);
-        free(to_sort);
-     }
 
+        inicio = clock();
+        sorts[j](to_sort, sizes[i]);
+        fim = clock();
+
+        free(to_sort);
+
+        tempo_cpu = ((double) (fim - inicio)) / CLOCKS_PER_SEC;
+        printf("\n\nMetodo: %s.\nArray de tamanho %d ordenado com sucesso.\n", names[j], sizes[i]);
+        printf("Tempo de execucao: %f segundos.\n", tempo_cpu);
+        printf("==============================");
+     }
   }
+
   return 0;
 }
