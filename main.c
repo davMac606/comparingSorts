@@ -5,52 +5,60 @@
 #include <string.h>
 #include <stdlib.h>
 
-void iterArr(int* array, int size) {
-  for (int i = 0; i < size; i++) {
-    array[i] = rand();
-  }
-}
+#ifdef MERGE
+#define NAME "Merge"
+#endif
 
-int* arrayTeste(int size) {
-  int* array = (int*)malloc(size*sizeof(int));
-  for (int i = 0; i < size; i++) {
-    array[i] = rand();
-  }
-  return array;
-}
+#ifdef INSERT
+#define NAME "Insert"
+#endif
+
+#ifdef BUBBLE
+#define NAME "Bubble"
+#endif
+
+#ifdef MERGE
+#define NAME "Merge"
+#endif
+
+#ifdef QUICK
+#define NAME "Quick"
+#endif
+
+#ifdef HEAP
+#define NAME "Heap"
+#endif
+
+#ifndef NAME
+#define NAME "bugus"
+#endif
 
 int main(void) {
   setlocale(LC_ALL, "");
   printf("Welcome!\n");
 
+  int count;
+  scanf("%d", &count);
+
+  int *to_sort = malloc(sizeof(int) * count);
+
+  for (int i = 0; i < count; i++) {
+    scanf("%d", &to_sort[i]);
+  }
+
   clock_t inicio, fim;
   double tempo_cpu;
 
-  boolean (*sorts[])(int* , int) = {SELECT, INSERT, BUBBLE, MERGE, QUICK, HEAP};
+  inicio = clock();
+  Sort(to_sort, count);
+  fim = clock();
 
-  char *names[] = { "Select", "Insert", "Bubble", "Merge", "Quick", "Heap" };
+  free(to_sort);
 
-  int sizes[] = {100,1000,10000,50000,100000};
-
-  for (int i = 0; i < 5; i++) { 
-     int *array = malloc(sizeof(int) * sizes[i]);
-     iterArr(array, sizes[i]);
-     for (int j = 0; j < 6; j++) {
-        int* to_sort = malloc(sizeof(int) * sizes[i]);
-        memcpy(to_sort, array, sizes[i] * sizeof(int));
-
-        inicio = clock();
-        sorts[j](to_sort, sizes[i]);
-        fim = clock();
-
-        free(to_sort);
-
-        tempo_cpu = ((double) (fim - inicio)) / CLOCKS_PER_SEC;
-        printf("\n\nMetodo: %s.\nArray de tamanho %d ordenado com sucesso.\n", names[j], sizes[i]);
-        printf("Tempo de execucao: %f segundos.\n", tempo_cpu);
-        printf("==============================");
-     }
-  }
+  tempo_cpu = ((double) (fim - inicio)) / CLOCKS_PER_SEC;
+  printf("\n\nMetodo: %s.\nArray de tamanho %d ordenado com sucesso.\n", NAME, count);
+  printf("Tempo de execucao: %f segundos.\n", tempo_cpu);
+  printf("==============================");
 
   return 0;
 }

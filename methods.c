@@ -1,6 +1,9 @@
 #include "methods.h"
 #include <stdlib.h>
 
+#ifdef SELECT
+#define FUNC Select
+
 boolean Select(int *array, int n) {
   if (n <= 0) {
     return false;
@@ -21,27 +24,31 @@ boolean Select(int *array, int n) {
   }
 
   return true;
-
 }
+#endif
+
+#ifdef INSERT
+#define FUNC Insert
 
 boolean Insert(int *array, int n) {
   if (n <= 0) {
     return false;
   }
   int j;
-  for (int i = 1; i < n; i++)
-    {
-        int temp = array[i];
-        for (j = i; (j > 0) && (temp < array[j - 1]); j--)
-        {
-            array[j] = array[j - 1];
-        }
-        array[j] = temp;
+  for (int i = 1; i < n; i++) {
+    int temp = array[i];
+    for (j = i; (j > 0) && (temp < array[j - 1]); j--) {
+        array[j] = array[j - 1];
     }
-
+    array[j] = temp;
+  }
 
   return true;
 }
+#endif
+
+#ifdef BUBBLE
+#define FUNC Bubble
 
 boolean Bubble(int *array, int n) {
   int temp;
@@ -62,6 +69,10 @@ boolean Bubble(int *array, int n) {
 
   return true;
 }
+#endif
+
+#ifdef MERGE
+#define FUNC Merge
 
 static void breakdown(int* array, int left, int pivot, int right) {
   int lenL = pivot - left;
@@ -120,14 +131,20 @@ boolean Merge(int* array, int n) {
 
   return true;
 }
+#endif
 
+
+#if defined(QUICK) || defined(HEAP)
 static void troca(int* numA, int* numB) {
   int temp;
   temp = *numA;
   *numA = *numB;
   *numB = temp;
-
 }
+#endif
+
+#ifdef QUICK
+#define FUNC Quick
 
 static int part(int* array, int left, int right) {
   int pivot = array[left];
@@ -161,6 +178,11 @@ boolean Quick(int* array, int n) {
   return true;
 }
 //sinceramente nao sei pq a gente ta tendo coisa de arvore binaria sem ter a menor ideia doq é uma, mas nao vou reclamar sabe
+
+#endif
+
+#ifdef HEAP
+#define FUNC Heap
 
 static void transHeap(int* array, int n, int i) {//i sendo a "raiz" da arvore
   int large = i; //https://bigrat.monster large?
@@ -197,3 +219,14 @@ boolean Heap(int* array, int n) {
 
   return true;
 }
+#endif
+
+#ifndef FUNC
+inline boolean Sort(int *array, int n) {
+  return false;
+}
+#else
+inline boolean Sort(int *array, int n) {
+  return FUNC(array, n);
+}
+#endif
