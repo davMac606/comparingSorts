@@ -97,14 +97,16 @@ boolean Bubble(int *array, int n)
 
 static void breakdown(int *array, int left, int pivot, int right)
 {
-  int lenL = pivot - left;
+  int i,j,k;
+  int lenL = pivot - left + 1;
   int lenR = right - pivot;
-  int leftPart[lenL], rightPart[lenR], i, j;
-  int k = left;
+
+  int leftPart[lenL], rightPart[lenR];
+  
 
   for (i = 0; i < lenL; i++)
   {
-    leftPart[i] = array[left + 1];
+    leftPart[i] = array[left + i];
   }
   for (j = 0; j < lenR; j++)
   {
@@ -112,17 +114,17 @@ static void breakdown(int *array, int left, int pivot, int right)
   }
   i = 0;
   j = 0;
-
-  while (i < lenL && j < lenR)
+  k = left;
+  while (i < lenL && j < lenR) //enquanto i e j forem menores que o tamanho do lado esquerdo e direito, respectivamente
   {
-    if (leftPart[i] <= rightPart[j])
+    if (leftPart[i] <= rightPart[j]) //se o elemento do lado esquerdo for menor ou igual ao do lado direito, ele é colocado no lado esquerdo
     {
       array[k] = leftPart[i];
       i++;
     }
     else
     {
-      array[k] = rightPart[j];
+      array[k] = rightPart[j]; //se o elemento do lado direito for menor que o do lado esquerdo, ele é colocado no lado direito
       j++;
     }
     k++;
@@ -133,24 +135,24 @@ static void breakdown(int *array, int left, int pivot, int right)
     array[k] = leftPart[i];
     i++;
     k++;
-  }
+  } //enquanto i for menor que o tamanho do lado esquerdo, ele é colocado no lado esquerdo
 
   while (j < lenR)
   {
     array[k] = rightPart[j];
     j++;
     k++;
-  }
+  } //enquanto j for menor que o tamanho do lado direito, ele é colocado no lado direito
 }
 static void mergeSort(int *array, int left, int right)
 {
   if (left < right)
   {
-    int pivot = (left + right) / 2;
+    int pivot = left + (right - left) / 2;
     mergeSort(array, left, pivot);
     mergeSort(array, pivot + 1, right);
     breakdown(array, left, pivot, right);
-  }
+  } //divide o array e chama a função principal do Merge Sort, onde os elementos são ordenados
 }
 
 boolean Merge(int *array, int n)
@@ -160,7 +162,7 @@ boolean Merge(int *array, int n)
   {
     return false;
   }
-  mergeSort(array, 0, n - 1);
+  mergeSort(array, 0, n - 1); //chama a função principal do Merge Sort no array, passando o primeiro e o ultimo elemento
   fim = clock();
   tempo_cpu = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
   printf("\n\nMetodo: Merge.\nArray de tamanho %d ordenado com sucesso.\n", n);
