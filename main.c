@@ -22,7 +22,7 @@ int* arrayTeste(int size) {
 int main(void) {
   setlocale(LC_ALL, "");
   printf("Welcome!\n");
-  void (*sorts[])(int* , int) = {Select, Insert, Bubble, Merge, Quick, Heap};
+  boolean (*sorts[])(int* , int) = {Select, Insert, Bubble, Merge, Quick, Heap};
   int sizes[5] = {100,1000,10000,50000,100000};
   for (int i = 0; i < 5; i++) { 
      int *array = malloc(sizeof(int) * sizes[i]);
