@@ -8,7 +8,7 @@ boolean Select(int* array, int n); //done
 boolean Insert(int* array, int n); //done
 boolean Bubble(int* array, int n); //done(i guess?)
 boolean Merge(int* array, int n); //done(erros no merge)
-boolean Quick(int* array, int n); //done(erros no quick)
+boolean Quick(int* array, int n); //done
 boolean Heap(int* array, int n); //done
 
 

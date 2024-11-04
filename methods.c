@@ -181,12 +181,12 @@ static int part(int *array, int left, int right)
 
   int pivot = array[left];
   int pos = right + 1;
-  for (int i = left; i < right; i++)
+  for (int i = right; i >= left; i--)
   {
     if (array[i] >= pivot)
     {
       pos--;
-      troca(&array[i], &array[left]);
+      troca(&array[i], &array[pos]);
     }
   }
   return pos;
@@ -241,9 +241,7 @@ void transHeap(int *array, int n, int i)
 
   if (large != i)
   {
-    int temp = array[i];
-    array[i] = array[large];
-    array[large] = temp;
+    troca(&array[i], &array[large]);
     transHeap(array, n, large);
   }
 }
@@ -258,9 +256,7 @@ void formaHeap(int *array, int n)
 
   for (int i = n - 1; i > 0; i--)
   {
-    int temp = array[0];
-    array[0] = array[i];
-    array[i] = temp;
+    troca(&array[0], &array[i]);
 
     transHeap(array, i, 0);
   }
