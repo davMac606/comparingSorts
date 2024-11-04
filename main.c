@@ -12,6 +12,7 @@ void iterArr(int* array, int size) {
 }
 
 int* arrayTeste(int size) {
+  srand(time(NULL));
   int* array = (int*)malloc(size*sizeof(int));
   for (int i = 0; i < size; i++) {
     array[i] = rand();
@@ -21,7 +22,7 @@ int* arrayTeste(int size) {
 int main(void) {
   setlocale(LC_ALL, "");
   printf("Welcome!\n");
-  void (*sorts[])(int* , int) = {Select, Insert, Bubble, Merge, Quick, Heap};
+  /*void (*sorts[])(int* , int) = {Select, Insert, Bubble, Merge, Quick, Heap};
   int sizes[5] = {100,1000,10000,50000,100000};
   for (int i = 0; i < 5; i++) { 
      int *array = malloc(sizeof(int) * sizes[i]);
@@ -34,6 +35,12 @@ int main(void) {
         free(to_sort);
      }
 
+  }*/
+  int *array = arrayTeste(100);
+  Heap(array, 100);
+  for(int i = 0; i < 100; i++) {
+    printf("%d\n", array[i]);
   }
+  free(array);
   return 0;
 }
