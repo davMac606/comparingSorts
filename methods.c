@@ -6,8 +6,6 @@ clock_t inicio, fim;
 double tempo_cpu;
 boolean Select(int *array, int n)
 {
-  inicio = clock();
-
   if (n <= 0)
   {
     return false;
@@ -31,17 +29,11 @@ boolean Select(int *array, int n)
       }
     }
   }
-  fim = clock();
-  tempo_cpu = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
-  printf("\n\nMetodo: Select.\nArray de tamanho %d ordenado com sucesso.\n", n);
-  printf("Tempo de execucao: %f segundos.\n", tempo_cpu);
-  printf("==============================");
   return true;
 }
 
 boolean Insert(int *array, int n)
 { // constantemente verifica se o elemento atual é menor que o anterior, se sim, troca os dois de posição
-  inicio = clock();
   if (n <= 0)
   {
     return false;
@@ -57,18 +49,11 @@ boolean Insert(int *array, int n)
     array[j] = temp;
   }
 
-  fim = clock();
-  tempo_cpu = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
-  printf("\n\nMetodo: Insert.\nArray de tamanho %d ordenado com sucesso.\n", n);
-  printf("Tempo de execucao: %f segundos.\n", tempo_cpu);
-  printf("==============================");
-
   return true;
 }
 
 boolean Bubble(int *array, int n)
 {
-  inicio = clock();
   int temp;
   if (n <= 0)
   {
@@ -87,11 +72,6 @@ boolean Bubble(int *array, int n)
       }
     }
   }
-  fim = clock();
-  tempo_cpu = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
-  printf("\n\nMetodo: Bubble.\nArray de tamanho %d ordenado com sucesso.\n", n);
-  printf("Tempo de execucao: %f segundos.\n", tempo_cpu);
-  printf("==============================");
   return true;
 }
 
@@ -157,17 +137,12 @@ static void mergeSort(int *array, int left, int right)
 
 boolean Merge(int *array, int n)
 {
-  inicio = clock();
   if (n <= 0)
   {
     return false;
   }
   mergeSort(array, 0, n - 1); //chama a função principal do Merge Sort no array, passando o primeiro e o ultimo elemento
-  fim = clock();
-  tempo_cpu = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
-  printf("\n\nMetodo: Merge.\nArray de tamanho %d ordenado com sucesso.\n", n);
-  printf("Tempo de execucao: %f segundos.\n", tempo_cpu);
-  printf("==============================");
+
   return true;
 }
 
@@ -208,17 +183,11 @@ static void quicksort(int *array, int left, int right)
 
 boolean Quick(int *array, int n)
 {
-  inicio = clock();
   if (n <= 0)
   {
     return false;
   }
   quicksort(array, 0, n - 1);
-  fim = clock();
-  tempo_cpu = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
-  printf("\n\nMetodo: Quick.\nArray de tamanho %d ordenado com sucesso.\n", n);
-  printf("Tempo de execucao: %f segundos.\n", tempo_cpu);
-  printf("==============================");
   return true;
 }
 // sinceramente nao sei pq a gente ta tendo coisa de arvore binaria sem ter a menor ideia doq é uma, mas nao vou reclamar sabe
@@ -267,16 +236,10 @@ void formaHeap(int *array, int n)
 
 boolean Heap(int *array, int n)
 {
-  inicio = clock();
   if (n <= 0)
   {
     return false;
   }
   formaHeap(array, n);
-  fim = clock();
-  tempo_cpu = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
-  printf("\n\nMetodo: Heap.\nArray de tamanho %d ordenado com sucesso.\n", n);
-  printf("Tempo de execucao: %f segundos.\n", tempo_cpu);
-  printf("==============================");
   return true;
 }
