@@ -29,6 +29,8 @@ int main(void)
   printf("Welcome!\n");
   clock_t inicio, fim;
   double tempo_cpu;
+  FILE *file;
+  file = fopen("D:\\PUCC\\ERD\\feedbacks\\results.txt", "a");
   boolean (*sorts[])(int *, int) = {SELECT, INSERT, BUBBLE, MERGE, QUICK, HEAP};
 
   char *names[] = {"Select", "Insert", "Bubble", "Merge", "Quick", "Heap"};
@@ -50,6 +52,8 @@ int main(void)
       free(to_sort);
 
       tempo_cpu = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
+
+      fprintf(file, "\n%s;%d;%f", names[j], sizes[i], tempo_cpu);
       printf("\n\nMetodo: %s.\nArray de tamanho %d ordenado com sucesso.\n", names[j], sizes[i]);
       printf("Tempo de execucao: %f segundos.\n", tempo_cpu);
       printf("==============================");
