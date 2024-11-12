@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <time.h>
+// #include "methods.h" should be the right one, but VSCode does not work with it. keep in mind.
 #include "methods.c"
 #include <locale.h>
 #include <string.h>
